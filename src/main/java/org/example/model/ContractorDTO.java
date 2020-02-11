@@ -1,8 +1,10 @@
 package org.example.model;
 
 import lombok.Builder;
+import lombok.ToString;
 
 @Builder
+@ToString
 public class ContractorDTO {
 
     private String firstName;
