@@ -1,9 +1,13 @@
 package org.example.model;
 
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
+@Builder
+@NoArgsConstructor
 public class Invoice {
 
     private String signature;

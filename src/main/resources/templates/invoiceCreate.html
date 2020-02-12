@@ -8,9 +8,9 @@
 
 <h1>Invoice Creator:</h1>
 
-<form th:action="@{/invoice/add}" method="post" enctype="multipart/form-data">
-    <input type="file" name="file"/>
-    <button type="submit">Upload</button>
+<form th:action="@{/invoice/add}" method="post" th:object="${invoice}">
+
+    <button type="submit">Create</button>
 </form>
 </body>
 </html>
