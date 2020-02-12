@@ -1,13 +1,13 @@
 package org.example.repository;
 
-import org.example.model.ContractorDTO;
+import org.example.model.Contractor;
 
 import java.io.InputStream;
 import java.util.List;
 
-public interface ContractorsRepository {
+public interface ContractorRepository {
 
-    List<ContractorDTO> allContractors();
+    List<Contractor> allContractors();
     void getContractors(InputStream inputStream);
     void clearContractorsRepository();
 }

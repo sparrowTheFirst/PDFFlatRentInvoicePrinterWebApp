@@ -1,12 +1,13 @@
 package org.example.controller;
 
-import org.example.model.ContractorDTO;
-import org.example.service.ContractorsService;
+import org.example.model.Contractor;
+import org.example.service.ContractorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,34 +15,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/contractor")
 public class ContractorController {
 
     @Autowired
-    private ContractorsService contractorsService;
+    private ContractorService contractorService;
 
     @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("contractors", contractorsService.allContractors());
-        return "home";
+        model.addAttribute("contractors", contractorService.allContractors());
+        return "contractorUpload";
     }
 
     @GetMapping("/reset")
     public String resetContractors(Model model) {
-        contractorsService.clearContractors();
-        model.addAttribute("contractors", contractorsService.allContractors());
-        return "home";
+        contractorService.clearContractors();
+        model.addAttribute("contractors", contractorService.allContractors());
+        return "contractorUpload";
     }
 
-    @PostMapping(value = "/", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
     public String uploadFile(Model model, @RequestParam("file") MultipartFile file) {
-        List<ContractorDTO> contractors = new ArrayList<>();
+        List<Contractor> contractors = new ArrayList<>();
         if (!file.isEmpty()) {
             try {
-                contractorsService.getContractors(file.getInputStream());
+                contractorService.getContractors(file.getInputStream());
             } catch (Exception e) {
             }
         }
-        model.addAttribute("contractors", contractorsService.allContractors());
-        return "home";
+        model.addAttribute("contractors", contractorService.allContractors());
+        return "contractorUpload";
     }
 }

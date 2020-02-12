@@ -3,7 +3,7 @@ package org.example.model;
 import lombok.Builder;
 
 @Builder
-public class ContractorDTO {
+public class Contractor {
 
     private String firstName;
     private String lastName;

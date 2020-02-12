@@ -14,7 +14,7 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @GetMapping("/")
+    @GetMapping("/add")
     public String getCreateInvoicePage() {
         return "invoiceCreate";
     }

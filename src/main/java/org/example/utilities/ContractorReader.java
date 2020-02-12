@@ -1,6 +1,6 @@
 package org.example.utilities;
 
-import org.example.model.ContractorDTO;
+import org.example.model.Contractor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,15 +9,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContractorsReaderFromInputStream {
+public class ContractorReader {
 
-    public static List<ContractorDTO> getContractors(InputStream inputStream) {
-        List<ContractorDTO> result = new ArrayList<>();
+    public static List<Contractor> getContractorsFromInputStream(InputStream inputStream) {
+        List<Contractor> result = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] split = line.split("[;,]");
-                result.add(ContractorDTO.builder()
+                result.add(Contractor.builder()
                         .firstName(split[0])
                         .lastName(split[1])
                         .address(split[2])

@@ -1,7 +1,7 @@
 package org.example.repository;
 
-import org.example.model.ContractorDTO;
-import org.example.utilities.ContractorsReaderFromInputStream;
+import org.example.model.Contractor;
+import org.example.utilities.ContractorReader;
 import org.springframework.stereotype.Repository;
 
 import java.io.InputStream;
@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ContractorsRepositoryImpl implements ContractorsRepository {
+public class ContractorRepositoryImpl implements ContractorRepository {
 
-    private List<ContractorDTO> contractors = new ArrayList<>();
+    private List<Contractor> contractors = new ArrayList<>();
 
     @Override
-    public List<ContractorDTO> allContractors() {
+    public List<Contractor> allContractors() {
         return contractors;
     }
 
     @Override
     public void getContractors(InputStream inputStream) {
-        contractors = ContractorsReaderFromInputStream.getContractors(inputStream);
+        contractors = ContractorReader.getContractorsFromInputStream(inputStream);
     }
 
     @Override
