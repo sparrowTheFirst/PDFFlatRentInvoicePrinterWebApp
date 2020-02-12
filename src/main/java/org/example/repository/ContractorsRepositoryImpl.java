@@ -24,12 +24,6 @@ public class ContractorsRepositoryImpl implements ContractorsRepository {
     }
 
     @Override
-    public ContractorDTO addContractor(ContractorDTO contractor) {
-        contractors.add(contractor);
-        return contractor;
-    }
-
-    @Override
     public void clearContractorsRepository() {
         contractors.clear();
     }
