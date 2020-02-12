@@ -3,7 +3,6 @@ package org.example.controller;
 import org.example.model.ContractorDTO;
 import org.example.utilities.ContractorsReaderFromCSVFile;
 import org.example.utilities.ListPrinter;
-import org.example.utilities.SystemPathsConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +20,6 @@ public class ContractorController {
     @GetMapping("/")
     public String home() {
         return "home";
-    }
-
-    @GetMapping("/list")
-    @ResponseBody
-    public String getContractorsList() {
-        return ListPrinter.getStringRepresentation(ContractorsReaderFromCSVFile.getContractors(SystemPathsConstants.CSV_FILE_PATH));
     }
 
     @PostMapping(value = "/", consumes = {"multipart/form-data"})
