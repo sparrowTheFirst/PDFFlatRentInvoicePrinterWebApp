@@ -13,6 +13,6 @@ public class ContractorDTO {
 
     @Override
     public String toString() {
-        return firstName.toUpperCase() + " " + lastName + " | " + address + " | " + postcode + " " + city;
+        return firstName + " " + lastName + " | " + address + " | " + postcode + " " + city;
     }
 }
