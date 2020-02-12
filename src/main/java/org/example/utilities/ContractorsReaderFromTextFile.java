@@ -1,6 +1,5 @@
 package org.example.utilities;
 
-import lombok.Getter;
 import org.example.model.ContractorDTO;
 
 import java.io.IOException;
@@ -9,9 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFileContractorsReader {
+public class ContractorsReaderFromTextFile {
 
-    public static List<ContractorDTO> getContractorsFromTextFile(String filePath) {
+    public static List<ContractorDTO> getContractors(String filePath) {
         List<ContractorDTO> result = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(System.getProperty("user.dir") + filePath));
