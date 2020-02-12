@@ -10,4 +10,5 @@ public interface ContractorsRepository {
     List<ContractorDTO> allContractors();
     void getContractors(InputStream inputStream);
     ContractorDTO addContractor(ContractorDTO contractor);
+    void clearContractorsRepository();
 }

@@ -23,4 +23,9 @@ public class ContractorsServiceImpl implements ContractorsService {
     public void getContractors(InputStream inputStream) {
         contractorsRepository.getContractors(inputStream);
     }
+
+    @Override
+    public void clearContractors() {
+        contractorsRepository.clearContractorsRepository();
+    }
 }

@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContractorsReaderFromCSVFile {
+public class ContractorsReaderFromInputStream {
 
     public static List<ContractorDTO> getContractors(InputStream inputStream) {
         List<ContractorDTO> result = new ArrayList<>();

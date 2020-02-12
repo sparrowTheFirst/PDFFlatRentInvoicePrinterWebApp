@@ -9,4 +9,5 @@ public interface ContractorsService {
 
     List<ContractorDTO> allContractors();
     void getContractors(InputStream inputStream);
+    void clearContractors();
 }

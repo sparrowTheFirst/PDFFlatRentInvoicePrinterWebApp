@@ -20,7 +20,14 @@ public class ContractorController {
     private ContractorsService contractorsService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String homePage(Model model) {
+        model.addAttribute("contractors", contractorsService.allContractors());
+        return "home";
+    }
+
+    @GetMapping("/reset")
+    public String resetContractors(Model model) {
+        contractorsService.clearContractors();
         model.addAttribute("contractors", contractorsService.allContractors());
         return "home";
     }

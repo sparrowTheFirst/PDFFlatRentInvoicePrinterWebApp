@@ -1,7 +1,7 @@
 package org.example.repository;
 
 import org.example.model.ContractorDTO;
-import org.example.utilities.ContractorsReaderFromCSVFile;
+import org.example.utilities.ContractorsReaderFromInputStream;
 import org.springframework.stereotype.Repository;
 
 import java.io.InputStream;
@@ -20,12 +20,17 @@ public class ContractorsRepositoryImpl implements ContractorsRepository {
 
     @Override
     public void getContractors(InputStream inputStream) {
-        contractors = ContractorsReaderFromCSVFile.getContractors(inputStream);
+        contractors = ContractorsReaderFromInputStream.getContractors(inputStream);
     }
 
     @Override
     public ContractorDTO addContractor(ContractorDTO contractor) {
         contractors.add(contractor);
         return contractor;
+    }
+
+    @Override
+    public void clearContractorsRepository() {
+        contractors.clear();
     }
 }
