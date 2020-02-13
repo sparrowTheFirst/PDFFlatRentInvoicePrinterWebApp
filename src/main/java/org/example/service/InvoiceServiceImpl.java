@@ -3,9 +3,11 @@ package org.example.service;
 import org.example.model.Contractor;
 import org.example.model.Invoice;
 import org.example.repository.InvoiceRepository;
+import org.example.utilities.ApartmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -31,13 +33,25 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public void fillInvoicesWithContractors(Invoice invoice, List<Contractor> contractors) {
-        for (Contractor contractor : contractors) {
+        for (int contractorIndex = 0; contractorIndex < contractors.size(); contractorIndex++) {
             addInvoice(Invoice.builder()
-                    .signature(invoice.getSignature())
+                    .signature(getSignature(contractorIndex, invoice.getCreatedAt(), contractors.get(contractorIndex).getApartmentType()))
                     .createdAt(invoice.getCreatedAt())
                     .period(invoice.getPeriod())
-                    .contractor(contractor)
+                    .contractor(contractors.get(contractorIndex))
                     .build());
         }
+    }
+
+    private String getSignature(int contractorIndex,LocalDate invoiceDate, ApartmentType apartmentType) {
+        StringBuilder result = new StringBuilder();
+        result.append(contractorIndex + 1)
+                .append("/")
+                .append(invoiceDate.getMonthValue() < 10 ? 0+""+invoiceDate.getMonthValue() : invoiceDate.getMonthValue())
+                .append("/")
+                .append(invoiceDate.getYear())
+                .append("/")
+                .append(apartmentType.name());
+        return result.toString();
     }
 }

@@ -42,4 +42,11 @@ public class InvoiceController {
         model.addAttribute("invoice", invoice);
         return "invoiceHome";
     }
+
+    @GetMapping("/reset")
+    public String resetContractors(Model model) {
+        invoiceService.clearInvoices();
+        model.addAttribute("invoices", invoiceService.allInvoices());
+        return "invoiceHome";
+    }
 }
