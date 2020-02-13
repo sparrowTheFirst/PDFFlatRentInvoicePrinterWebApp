@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.model.Contractor;
 import org.example.model.Invoice;
 import org.example.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,20 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public void addInvoices(List<Invoice> invoices) {
-        invoiceRepository.addInvoices(invoices);
+    public void clearInvoices() {
+        invoiceRepository.clearInvoices();
     }
 
     @Override
-    public void clearInvoices(List<Invoice> invoices) {
-        invoiceRepository.clearInvoices(invoices);
+    public void fillInvoicesWithContractors(Invoice invoice, List<Contractor> contractors) {
+        for (Contractor contractor : contractors) {
+            addInvoice(Invoice.builder()
+                    .signature(invoice.getSignature())
+                    .createdAt(invoice.getCreatedAt())
+                    .period(invoice.getPeriod())
+                    .amount(invoice.getAmount())
+                    .contractor(contractor)
+                    .build());
+        }
     }
 }

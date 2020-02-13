@@ -1,8 +1,14 @@
 package org.example.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class Contractor {
 
     private String firstName;
@@ -13,6 +19,6 @@ public class Contractor {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " | " + address + " | " + postcode + " " + city;
+        return lastName + " " + firstName + "\n" + postcode + " " + city + "\n" + address;
     }
 }

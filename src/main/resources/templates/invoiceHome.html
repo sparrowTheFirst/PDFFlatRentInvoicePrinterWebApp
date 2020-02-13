@@ -7,7 +7,18 @@
 <body>
 
 <h1>Invoice Home Page</h1>
+<h3>Last created document:</h3>
 <p th:text="${invoice}">invoice</p>
+
+<!--<div th:if="!${invoices} == null">-->
+    <h3>List of all documents:</h3>
+    <ul th:each="inv : ${invoices}">
+        <li>
+            <p th:text="${inv}">invoice</p>
+        </li>
+    </ul>
+<!--</div>-->
+
 
 </body>
 </html>

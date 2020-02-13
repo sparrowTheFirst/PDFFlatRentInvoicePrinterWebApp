@@ -8,6 +8,5 @@ public interface InvoiceRepository {
 
     List<Invoice> allInvoices();
     void addInvoice(Invoice invoice);
-    void addInvoices(List<Invoice> invoices);
-    void clearInvoices(List<Invoice> invoices);
+    void clearInvoices();
 }

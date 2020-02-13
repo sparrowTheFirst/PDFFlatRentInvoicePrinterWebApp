@@ -13,11 +13,11 @@
     <button type="submit">Upload</button>
 </form>
 
-<h1 th:if="!${contractors}==null">Contractors:</h1>
+<h1 th:if="!${contractors} == null">Contractors:</h1>
 
 <ul th:each="contractor : ${contractors}">
     <li>
-        <p th:text="${contractor}">contractor from list</p>
+        <p th:text="${contractor}">contractor</p>
     </li>
 </ul>
 

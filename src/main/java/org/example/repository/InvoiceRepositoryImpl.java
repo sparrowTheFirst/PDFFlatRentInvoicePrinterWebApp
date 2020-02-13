@@ -22,12 +22,7 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
     }
 
     @Override
-    public void addInvoices(List<Invoice> invoices) {
-            this.invoices = invoices;
-    }
-
-    @Override
-    public void clearInvoices(List<Invoice> invoices) {
+    public void clearInvoices() {
         invoices.clear();
     }
 }

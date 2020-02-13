@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.Invoice;
+import org.example.service.ContractorService;
 import org.example.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
@@ -20,8 +20,12 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
+    @Autowired
+    private ContractorService contractorService;
+
     @GetMapping("/")
-    public String getInvoicePage() {
+    public String getInvoicePage(Model model) {
+        model.addAttribute("invoices", invoiceService.allInvoices());
         return "invoiceHome";
     }
 
@@ -32,8 +36,9 @@ public class InvoiceController {
     }
 
     @PostMapping("/add")
-    public String postCreateInvoicePage(Model model, @Valid @ModelAttribute Invoice invoice) {
-        invoiceService.addInvoice(invoice);
+    public String postCreateInvoicePage(Model model, @ModelAttribute Invoice invoice) {
+        invoiceService.fillInvoicesWithContractors(invoice, contractorService.allContractors());
+        model.addAttribute("invoices", invoiceService.allInvoices());
         model.addAttribute("invoice", invoice);
         return "invoiceHome";
     }
