@@ -11,4 +11,5 @@ public interface SalesmanRepository {
     void addSalesman(Salesman salesman);
     void clearSalesmen();
     void getSalesmen(InputStream inputStream);
+    Salesman getSalesman(int salesmanIndex);
 }

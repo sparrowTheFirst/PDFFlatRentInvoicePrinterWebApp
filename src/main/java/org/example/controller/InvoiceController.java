@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.Invoice;
 import org.example.service.ContractorService;
 import org.example.service.InvoiceService;
+import org.example.utilities.PDFCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,8 +45,15 @@ public class InvoiceController {
     }
 
     @GetMapping("/reset")
-    public String resetContractors(Model model) {
+    public String resetInvoices(Model model) {
         invoiceService.clearInvoices();
+        model.addAttribute("invoices", invoiceService.allInvoices());
+        return "invoiceHome";
+    }
+
+    @GetMapping("/print")
+    public String printInvoices(Model model) {
+        PDFCreator.print(invoiceService.allInvoices());
         model.addAttribute("invoices", invoiceService.allInvoices());
         return "invoiceHome";
     }

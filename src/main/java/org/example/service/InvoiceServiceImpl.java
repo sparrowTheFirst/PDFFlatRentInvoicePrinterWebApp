@@ -2,7 +2,9 @@ package org.example.service;
 
 import org.example.model.Contractor;
 import org.example.model.Invoice;
+import org.example.model.Salesman;
 import org.example.repository.InvoiceRepository;
+import org.example.repository.SalesmanRepository;
 import org.example.utilities.ApartmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Autowired
     private InvoiceRepository invoiceRepository;
+
+    @Autowired
+    private SalesmanRepository salesmanRepository;
 
     @Override
     public List<Invoice> allInvoices() {
@@ -38,6 +43,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .signature(getSignature(contractorIndex, invoice.getCreatedAt(), contractors.get(contractorIndex).getApartmentType()))
                     .createdAt(invoice.getCreatedAt())
                     .period(invoice.getPeriod())
+                    .salesman(salesmanRepository.getSalesman(0))
                     .contractor(contractors.get(contractorIndex))
                     .build());
         }

@@ -32,4 +32,9 @@ public class SalesmanRepositoryImpl implements SalesmanRepository {
     public void getSalesmen(InputStream inputStream) {
         salesmen = SalesmanReader.getSalesmenFromInputStream(inputStream);
     }
+
+    @Override
+    public Salesman getSalesman(int salesmanIndex) {
+        return salesmen.get(salesmanIndex);
+    }
 }

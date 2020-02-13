@@ -19,9 +19,4 @@ public class Contractor {
     private String city;
     private ApartmentType apartmentType;
     private BigDecimal amount;
-
-    @Override
-    public String toString() {
-        return lastName + " " + firstName + "\n" + postcode + " " + city + "\n" + address + "\n" + apartmentType.name() + " " + amount + " PLN";
-    }
 }

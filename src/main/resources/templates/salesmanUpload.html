@@ -19,7 +19,9 @@
 
 <ul th:each="salesman : ${salesmen}">
     <li>
-        <p th:text="${salesman}">salesman</p>
+        <p th:text="${salesman.companyName}">salesman companyName</p>
+        <p th:text="${salesman.postcode} + ' ' + ${salesman.city}">salesman postcode and city</p>
+        <p th:text="${salesman.address}">salesman address</p>
     </li>
 </ul>
 

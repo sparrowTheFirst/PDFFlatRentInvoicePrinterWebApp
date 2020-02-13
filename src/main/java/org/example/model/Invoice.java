@@ -20,13 +20,6 @@ public class Invoice {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
     private String period;
+    private Salesman salesman;
     private Contractor contractor;
-
-    @Override
-    public String toString() {
-        return "Faktura o sygnaturze: " + (signature != null ? signature : "-") + ", wystawiona dnia: " + createdAt + "\n"
-                + "Sprzedawca: " + "\n"
-                + "Najemca: " + (contractor != null ? contractor.toString() : "-") + "\n"
-                + "Tytułem: Wynajem mieszkania za miesiąc: " + period + ", w kwocie: ";
-    }
 }
