@@ -2,24 +2,24 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:include="navbar :: head">
     <meta charset="UTF-8"/>
-    <title>Contractor Upload Page</title>
+    <title>Salesman Upload Page</title>
 </head>
 <body>
 
 <div th:include="navbar :: menu"></div>
 
-<h1>Upload CSV file with contractors:</h1>
+<h1>Upload CSV file with salesmen:</h1>
 
-<form th:action="@{/contractor/upload}" method="post" enctype="multipart/form-data">
+<form th:action="@{/salesman/upload}" method="post" enctype="multipart/form-data">
     <input type="file" name="file"/>
     <button type="submit">Upload</button>
 </form>
 
-<h1 th:if="!${contractors} == null">Contractors:</h1>
+<h1 th:if="!${salesmen} == null">Salesmen:</h1>
 
-<ul th:each="contractor : ${contractors}">
+<ul th:each="salesman : ${salesmen}">
     <li>
-        <p th:text="${contractor}">contractor</p>
+        <p th:text="${salesman}">salesman</p>
     </li>
 </ul>
 

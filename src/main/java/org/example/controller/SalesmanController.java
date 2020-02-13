@@ -1,7 +1,6 @@
 package org.example.controller;
 
-import org.example.model.Contractor;
-import org.example.service.ContractorService;
+import org.example.service.SalesmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,38 +10,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
-@RequestMapping("/contractor")
-public class ContractorController {
+@RequestMapping("/salesman")
+public class SalesmanController {
 
     @Autowired
-    private ContractorService contractorService;
+    private SalesmanService salesmanService;
 
     @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("contractors", contractorService.allContractors());
-        return "contractorUpload";
+        model.addAttribute("salesmen", salesmanService.allSalesmen());
+        return "salesmanUpload";
     }
 
     @GetMapping("/reset")
     public String resetContractors(Model model) {
-        contractorService.clearContractors();
-        model.addAttribute("contractors", contractorService.allContractors());
-        return "contractorUpload";
+        salesmanService.clearSalesmen();
+        model.addAttribute("salesmen", salesmanService.allSalesmen());
+        return "salesmanUpload";
     }
 
     @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
     public String uploadFile(Model model, @RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
-                contractorService.getContractors(file.getInputStream());
+                salesmanService.getSalesmen(file.getInputStream());
             } catch (Exception e) {
             }
         }
-        model.addAttribute("contractors", contractorService.allContractors());
-        return "contractorUpload";
+        model.addAttribute("salesmen", salesmanService.allSalesmen());
+        return "salesmanUpload";
     }
 }

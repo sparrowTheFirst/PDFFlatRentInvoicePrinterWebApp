@@ -11,6 +11,14 @@ import java.util.List;
 
 public class ContractorReader {
 
+    private static final int CONTRACTOR_FIRST_NAME = 0;
+    private static final int CONTRACTOR_LAST_NAME = 1;
+    private static final int CONTRACTOR_ADDRESS = 2;
+    private static final int CONTRACTOR_POSTCODE = 3;
+    private static final int CONTRACTOR_CITY = 4;
+    private static final int CONTRACTOR_APARTMENT_TYPE = 5;
+    private static final int CONTRACTOR_APARTMENT_PRICE = 6;
+
     public static List<Contractor> getContractorsFromInputStream(InputStream inputStream) {
         List<Contractor> result = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -18,11 +26,11 @@ public class ContractorReader {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] split = line.split("[;,]");
                 result.add(Contractor.builder()
-                        .firstName(split[0])
-                        .lastName(split[1])
-                        .address(split[2])
-                        .postcode(split[3])
-                        .city(split[4])
+                        .firstName(split[CONTRACTOR_FIRST_NAME])
+                        .lastName(split[CONTRACTOR_LAST_NAME])
+                        .address(split[CONTRACTOR_ADDRESS])
+                        .postcode(split[CONTRACTOR_POSTCODE])
+                        .city(split[CONTRACTOR_CITY])
                         .build());
             }
         } catch (IOException e) {

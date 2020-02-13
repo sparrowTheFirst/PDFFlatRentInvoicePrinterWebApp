@@ -2,13 +2,11 @@ package org.example.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@Getter
 public class Contractor {
 
     private String firstName;
