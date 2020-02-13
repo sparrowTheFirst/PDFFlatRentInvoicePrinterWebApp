@@ -36,7 +36,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .signature(invoice.getSignature())
                     .createdAt(invoice.getCreatedAt())
                     .period(invoice.getPeriod())
-                    .amount(invoice.getAmount())
                     .contractor(contractor)
                     .build());
         }

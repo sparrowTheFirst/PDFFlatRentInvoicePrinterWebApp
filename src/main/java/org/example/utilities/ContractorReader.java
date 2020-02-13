@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class ContractorReader {
                         .address(split[CONTRACTOR_ADDRESS])
                         .postcode(split[CONTRACTOR_POSTCODE])
                         .city(split[CONTRACTOR_CITY])
+                        .apartmentType(ApartmentType.valueOf(split[CONTRACTOR_APARTMENT_TYPE]))
+                        .amount(BigDecimal.valueOf(Integer.valueOf(split[CONTRACTOR_APARTMENT_PRICE])))
                         .build());
             }
         } catch (IOException e) {

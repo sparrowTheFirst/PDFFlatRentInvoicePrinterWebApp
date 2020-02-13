@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Builder
@@ -21,7 +20,6 @@ public class Invoice {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
     private String period;
-    private BigDecimal amount;
     private Contractor contractor;
 
     @Override
@@ -29,6 +27,6 @@ public class Invoice {
         return "Faktura o sygnaturze: " + signature + ", wystawiona dnia: " + createdAt + "\n"
                 + "Sprzedawca: " + "\n"
                 + "Najemca: " + (contractor != null ? contractor.toString() : "-") + "\n"
-                + "Tytułem: Wynajem mieszkania za miesiąc: " + period + ", w kwocie: " + amount;
+                + "Tytułem: Wynajem mieszkania za miesiąc: " + period + ", w kwocie: ";
     }
 }

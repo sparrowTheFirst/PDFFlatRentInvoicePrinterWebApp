@@ -3,6 +3,9 @@ package org.example.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.example.utilities.ApartmentType;
+
+import java.math.BigDecimal;
 
 @Builder
 @AllArgsConstructor
@@ -14,9 +17,11 @@ public class Contractor {
     private String address;
     private String postcode;
     private String city;
+    private ApartmentType apartmentType;
+    private BigDecimal amount;
 
     @Override
     public String toString() {
-        return lastName + " " + firstName + "\n" + postcode + " " + city + "\n" + address;
+        return lastName + " " + firstName + "\n" + postcode + " " + city + "\n" + address + "\n" + apartmentType.name() + " " + amount + " PLN";
     }
 }
