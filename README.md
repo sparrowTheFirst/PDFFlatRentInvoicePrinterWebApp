@@ -7,7 +7,7 @@ Invoice of flat renting
 `mvn spring-boot:run`  
 3. Open given URL address in browser: `http://localhost:8081`  
 ### CSV File construction rules
-* structure: `firstName lastName address postcode city`
+* contractor structure: `firstName,lastName,address,postcode,city`
 * used separators: `;` and `,`
 * used file extensions: `.txt .csv` 
 * used no extra spaces before and after evey record 

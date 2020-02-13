@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:include="navbar :: head">
     <meta charset="UTF-8"/>
     <title>Invoice Home Page</title>
 </head>
 <body>
+
+<div th:include="navbar :: menu"></div>
 
 <h1>Invoice Home Page</h1>
 <h3>Last created document:</h3>
