@@ -10,8 +10,6 @@
 
 <div class="container">
     <h1>Invoice Home Page</h1>
-    <h3>Last created document:</h3>
-    <p th:text="'The seller has issued an invoice on: ' + ${invoice.createdAt} + ' for period: ' + ${invoice.period}">invoice</p>
 
     <h3>List of all documents:</h3>
     <ul th:each="invoice : ${invoices}">

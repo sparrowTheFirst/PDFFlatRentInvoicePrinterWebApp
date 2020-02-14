@@ -23,13 +23,6 @@ public class SalesmanController {
         return "salesmanUpload";
     }
 
-    @GetMapping("/reset")
-    public String resetContractors(Model model) {
-        salesmanService.clearSalesmen();
-        model.addAttribute("salesmen", salesmanService.allSalesmen());
-        return "salesmanUpload";
-    }
-
     @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
     public String uploadFile(Model model, @RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
@@ -38,6 +31,13 @@ public class SalesmanController {
             } catch (Exception e) {
             }
         }
+        model.addAttribute("salesmen", salesmanService.allSalesmen());
+        return "salesmanUpload";
+    }
+
+    @GetMapping("/reset")
+    public String resetContractors(Model model) {
+        salesmanService.clearSalesmen();
         model.addAttribute("salesmen", salesmanService.allSalesmen());
         return "salesmanUpload";
     }

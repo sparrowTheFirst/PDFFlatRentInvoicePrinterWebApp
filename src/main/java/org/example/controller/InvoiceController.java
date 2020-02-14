@@ -40,7 +40,6 @@ public class InvoiceController {
     public String postCreateInvoicePage(Model model, @ModelAttribute Invoice invoice) {
         invoiceService.fillInvoicesWithContractors(invoice, contractorService.allContractors());
         model.addAttribute("invoices", invoiceService.allInvoices());
-        model.addAttribute("invoice", invoice);
         return "invoiceHome";
     }
 

@@ -9,6 +9,7 @@ import org.example.model.Invoice;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PDFCreator {
@@ -18,12 +19,15 @@ public class PDFCreator {
     private static String PDF_DOCUMENT_FILE_NAME;
 
     public static void print(List<Invoice> invoices) {
-        for (Invoice invoice : invoices) {
-            try {
-                File directory = new File(PDF_DOCUMENTS_DIRECTORY_NAME + invoice.getCreatedAt().getDayOfMonth() + "_" + invoice.getCreatedAt().getMonthValue() + "_" + invoice.getCreatedAt().getYear());
-                if (!directory.exists()) {
-                    directory.mkdir();
-                }
+        try {
+            File directory = new File(PDF_DOCUMENTS_DIRECTORY_NAME
+                    + getDateTimeNow().getDayOfMonth() + "_" + getDateTimeNow().getMonthValue() + "_" + getDateTimeNow().getYear()
+                    + "_"
+                    + getDateTimeNow().getHour() + "_" + getDateTimeNow().getMinute() + "_" + getDateTimeNow().getSecond());
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            for (Invoice invoice : invoices) {
                 PDF_DOCUMENT_FILE_NAME = invoice.getSignature().replace("/", "_") + ".pdf";
                 File pdfFile = new File(directory.getAbsolutePath() + "\\" + PDF_DOCUMENT_FILE_NAME);
                 Document document = new Document();
@@ -38,10 +42,14 @@ public class PDFCreator {
                 document.open();
                 document.add(new Paragraph(invoice.getSignature()));
                 document.close();
-                //write document close
-            } catch (DocumentException | FileNotFoundException e) {
-                e.printStackTrace();
             }
+            //write document close
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
         }
+    }
+
+    private static LocalDateTime getDateTimeNow() {
+        return LocalDateTime.now();
     }
 }
