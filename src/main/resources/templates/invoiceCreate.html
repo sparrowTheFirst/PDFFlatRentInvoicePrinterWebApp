@@ -6,36 +6,38 @@
 </head>
 <body>
 
-<div th:include="navbar :: menu"></div>
+<div class="sticky-top" th:include="navbar :: menu"></div>
 
-<h1>Invoice Creator:</h1>
+<div class="container">
+    <h1>Invoice Creator:</h1>
 
-<form th:action="@{/invoice/add}" method="post" th:object="${invoice}">
-    <div class="row">
-        <label for="createdAt">Invoice Date:</label>
-        <input id="createdAt" type="date" th:value="*{createdAt}" th:field="*{createdAt}"/>
-    </div>
+    <form th:action="@{/invoice/add}" method="post" th:object="${invoice}">
+        <div class="row">
+            <label for="createdAt">Invoice Date:</label>
+            <input id="createdAt" type="date" th:value="*{createdAt}" th:field="*{createdAt}"/>
+        </div>
 
-    <div class="row">
-        <label for="period">Invoice for period:</label>
-        <select id="period" th:field="*{period}">
-            <option selected="selected" value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-        </select>
-    </div>
+        <div class="row">
+            <label for="period">Invoice for period:</label>
+            <select id="period" th:field="*{period}">
+                <option selected="selected" value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+        </div>
 
-    <button type="submit">Create Invoice Batch</button>
-</form>
+        <button type="submit">Create Invoice Batch</button>
+    </form>
+</div>
 
 </body>
 </html>

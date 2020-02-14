@@ -6,25 +6,27 @@
 </head>
 <body>
 
-<div th:include="navbar :: menu"></div>
+<div class="sticky-top" th:include="navbar :: menu"></div>
 
-<h1>Upload CSV file with contractors:</h1>
+<div class="container">
+    <h1>Upload CSV file with contractors:</h1>
 
-<form th:action="@{/contractor/upload}" method="post" enctype="multipart/form-data">
-    <input type="file" name="file"/>
-    <button type="submit">Upload</button>
-</form>
+    <form th:action="@{/contractor/upload}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file"/>
+        <button type="submit">Upload</button>
+    </form>
 
-<h1 th:if="!${contractors} == null">Contractors:</h1>
+    <h1>Contractors:</h1>
 
-<ul th:each="contractor : ${contractors}">
-    <li>
-        <p th:text="${contractor.firstName} + ' ' + ${contractor.lastName}">contractor firstName and lastName</p>
-        <p th:text="${contractor.postcode} + ' ' + ${contractor.city}">contractor postcode and city</p>
-        <p th:text="${contractor.address}">contractor address</p>
-        <p th:text="${contractor.apartmentType} + ' ' + ${contractor.amount}">contractor postcode and city</p>
-    </li>
-</ul>
+    <ul th:each="contractor : ${contractors}">
+        <li>
+            <p th:text="${contractor.firstName} + ' ' + ${contractor.lastName}">contractor firstName and lastName</p>
+            <p th:text="${contractor.postcode} + ' ' + ${contractor.city}">contractor postcode and city</p>
+            <p th:text="${contractor.address}">contractor address</p>
+            <p th:text="${contractor.apartmentType} + ' ' + ${contractor.amount}">contractor postcode and city</p>
+        </li>
+    </ul>
+</div>
 
 </body>
 </html>

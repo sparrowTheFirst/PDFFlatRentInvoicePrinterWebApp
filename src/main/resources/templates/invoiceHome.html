@@ -6,22 +6,24 @@
 </head>
 <body>
 
-<div th:include="navbar :: menu"></div>
+<div class="sticky-top" th:include="navbar :: menu"></div>
 
-<h1>Invoice Home Page</h1>
-<h3>Last created document:</h3>
-<p th:text="${invoice}">invoice</p>
+<div class="container">
+    <h1>Invoice Home Page</h1>
+    <h3>Last created document:</h3>
+    <p th:text="${invoice}">invoice</p>
 
-<h3 th:if="!(${invoices} == null)">List of all documents:</h3>
-<ul th:each="invoice : ${invoices}">
-    <li>
-        <p th:text="'Invoice signature: ' + ${invoice.signature}">invoice signature</p>
-        <p th:text="'Invoice date: ' + ${invoice.createdAt}">invoice createdAt</p>
-        <p th:text="'Invoice salesman: ' + ${invoice.salesman.companyName} + ' | ' + ${invoice.salesman.postcode} + ' ' + ${invoice.salesman.city} + ' | ' + ${invoice.salesman.address}">invoice salesman companyName</p>
-        <p th:text="'Invoice contractor: ' + ${invoice.contractor.lastName} + ' ' + ${invoice.contractor.firstName} + ' | ' + ${invoice.contractor.postcode} + ' ' + ${invoice.contractor.city} + ' | ' + ${invoice.contractor.address}">invoice contractor</p>
-        <p th:text="'Rent period: ' + ${invoice.period} + ' for price: ' + ${invoice.contractor.amount}">rent period and price</p>
-    </li>
-</ul>
+    <h3>List of all documents:</h3>
+    <ul th:each="invoice : ${invoices}">
+        <li>
+            <p th:text="'Invoice signature: ' + ${invoice.signature}">invoice signature</p>
+            <p th:text="'Invoice date: ' + ${invoice.createdAt}">invoice createdAt</p>
+            <p th:text="'Invoice salesman: ' + ${invoice.salesman.companyName} + ' | ' + ${invoice.salesman.postcode} + ' ' + ${invoice.salesman.city} + ' | ' + ${invoice.salesman.address}">invoice salesman companyName</p>
+            <p th:text="'Invoice contractor: ' + ${invoice.contractor.lastName} + ' ' + ${invoice.contractor.firstName} + ' | ' + ${invoice.contractor.postcode} + ' ' + ${invoice.contractor.city} + ' | ' + ${invoice.contractor.address}">invoice contractor</p>
+            <p th:text="'Rent period: ' + ${invoice.period} + ' for price: ' + ${invoice.contractor.amount}">rent period and price</p>
+        </li>
+    </ul>
+</div>
 
 </body>
 </html>
