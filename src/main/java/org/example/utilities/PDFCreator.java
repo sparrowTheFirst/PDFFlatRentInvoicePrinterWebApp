@@ -14,7 +14,7 @@ import java.util.List;
 public class PDFCreator {
 
     private static String PDF_DOCUMENTS_PATH = System.getProperty("user.dir") + "\\target\\printedPDFDocuments\\";
-    private static String PDF_DOCUMENTS_DIRECTORY_NAME = PDF_DOCUMENTS_PATH + "printedAt_";
+    private static String PDF_DOCUMENTS_DIRECTORY_NAME = PDF_DOCUMENTS_PATH + "printedOn_";
     private static String PDF_DOCUMENT_FILE_NAME;
 
     public static void print(List<Invoice> invoices) {
@@ -22,7 +22,7 @@ public class PDFCreator {
             try {
                 File directory = new File(PDF_DOCUMENTS_DIRECTORY_NAME + invoice.getCreatedAt().getDayOfMonth() + "_" + invoice.getCreatedAt().getMonthValue() + "_" + invoice.getCreatedAt().getYear());
                 if (!directory.exists()) {
-                    directory.mkdirs();
+                    directory.mkdir();
                 }
                 PDF_DOCUMENT_FILE_NAME = invoice.getSignature().replace("/", "_") + ".pdf";
                 File pdfFile = new File(directory.getAbsolutePath() + "\\" + PDF_DOCUMENT_FILE_NAME);

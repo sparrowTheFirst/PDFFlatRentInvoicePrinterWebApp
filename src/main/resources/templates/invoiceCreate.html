@@ -13,7 +13,7 @@
 <form th:action="@{/invoice/add}" method="post" th:object="${invoice}">
     <div class="row">
         <label for="createdAt">Invoice Date:</label>
-        <input id="createdAt" th:type="date" th:value="*{createdAt}" th:field="*{createdAt}"/>
+        <input id="createdAt" type="date" th:value="*{createdAt}" th:field="*{createdAt}"/>
     </div>
 
     <div class="row">

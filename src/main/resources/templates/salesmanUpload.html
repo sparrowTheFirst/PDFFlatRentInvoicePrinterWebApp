@@ -15,15 +15,19 @@
     <button type="submit">Upload</button>
 </form>
 
-<h1 th:if="!${salesmen} == null">Salesmen:</h1>
-
-<ul th:each="salesman : ${salesmen}">
-    <li>
-        <p th:text="${salesman.companyName}">salesman companyName</p>
-        <p th:text="${salesman.postcode} + ' ' + ${salesman.city}">salesman postcode and city</p>
-        <p th:text="${salesman.address}">salesman address</p>
-    </li>
-</ul>
+<div class="container">
+    <h1>Salesman:</h1>
+    <div class="row mx-auto">
+        <p th:if="${salesmen}!=null" th:text="${salesmen[0].companyName}">salesman companyName</p>
+    </div>
+    <div class="row mx-auto">
+        <p th:if="${salesmen}!=null" th:text="${salesmen[0].postcode} + ' ' + ${salesmen[0].city}">salesman postcode and
+            city</p>
+    </div>
+    <div class="row mx-auto">
+        <p th:if="${salesmen}!=null" th:text="${salesmen[0].address}">salesman address</p>
+    </div>
+</div>
 
 </body>
 </html>
