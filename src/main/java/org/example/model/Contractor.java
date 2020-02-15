@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import org.example.utilities.ApartmentType;
 
-import java.math.BigDecimal;
-
 @Builder
 @AllArgsConstructor
 @Getter
@@ -18,5 +16,5 @@ public class Contractor {
     private String postcode;
     private String city;
     private ApartmentType apartmentType;
-    private BigDecimal amount;
+    private String amount;
 }

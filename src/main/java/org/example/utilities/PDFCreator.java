@@ -167,7 +167,7 @@ public class PDFCreator {
                 cell.addElement(phrase);
                 fourthRow.addCell(cell);
 
-                phrase = new Paragraph(String.valueOf(invoice.getContractor().getAmount()), normalSize8Font);
+                phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
@@ -175,7 +175,7 @@ public class PDFCreator {
                 cell.addElement(phrase);
                 fourthRow.addCell(cell);
 
-                phrase = new Paragraph(String.valueOf(invoice.getContractor().getAmount()), normalSize8Font);
+                phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
@@ -197,7 +197,7 @@ public class PDFCreator {
                 cell.addElement(phrase);
                 fourthRow.addCell(cell);
 
-                phrase = new Paragraph(String.valueOf(invoice.getContractor().getAmount()), normalSize8Font);
+                phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setColspan(3);
