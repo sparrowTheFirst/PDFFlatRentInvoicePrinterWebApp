@@ -17,4 +17,5 @@ public class Contractor {
     private String city;
     private ApartmentType apartmentType;
     private String amount;
+    private String apartmentNumber;
 }

@@ -18,6 +18,7 @@ public class ContractorReader {
     private static final int CONTRACTOR_CITY = 4;
     private static final int CONTRACTOR_APARTMENT_TYPE = 5;
     private static final int CONTRACTOR_APARTMENT_PRICE = 6;
+    private static final int CONTRACTOR_APARTMENT_NUMBER = 7;
 
     public static List<Contractor> getContractorsFromInputStream(InputStream inputStream) {
         List<Contractor> result = new ArrayList<>();
@@ -33,6 +34,7 @@ public class ContractorReader {
                         .city(split[CONTRACTOR_CITY])
                         .apartmentType(ApartmentType.valueOf(split[CONTRACTOR_APARTMENT_TYPE]))
                         .amount(split[CONTRACTOR_APARTMENT_PRICE])
+                        .apartmentNumber(split[CONTRACTOR_APARTMENT_NUMBER])
                         .build());
             }
         } catch (IOException e) {

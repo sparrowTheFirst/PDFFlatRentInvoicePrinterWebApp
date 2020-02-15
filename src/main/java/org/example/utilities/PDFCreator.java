@@ -40,7 +40,7 @@ public class PDFCreator {
 
                 final String SALESMAN_DATA = "Sprzedawca: \n" + invoice.getSalesman().getCompanyName().toUpperCase() + "\n" + invoice.getSalesman().getPostcode() + " " + invoice.getSalesman().getCity().toUpperCase() + "\n" + invoice.getSalesman().getAddress().toUpperCase();
                 final String BUYER_FIELD_NAME = "nabywca:".toUpperCase();
-                final String BUYER_DATA = invoice.getContractor().getFirstName().toUpperCase() + " " + invoice.getContractor().getLastName().toUpperCase() + "\n" + invoice.getContractor().getPostcode() + " " + invoice.getContractor().getCity().toUpperCase() + "\n" + invoice.getContractor().getAddress().toUpperCase() + "\ndodac nr mieszkania".toUpperCase();
+                final String BUYER_DATA = invoice.getContractor().getFirstName().toUpperCase() + " " + invoice.getContractor().getLastName().toUpperCase() + "\n" + invoice.getContractor().getPostcode() + " " + invoice.getContractor().getCity().toUpperCase() + "\n" + invoice.getContractor().getAddress().toUpperCase() + "\nmieszkanie nr ".toUpperCase() + invoice.getContractor().getApartmentNumber();
                 final String ORIGINAL_COPY_TEXT = "oryginal / kopia";
                 final String SERVICE_CONTENT_TEXT = "CZYNSZ ZA LOKAL\nMIESZKALNY ZA MIESIAC\n" + invoice.getPeriod() + "-" + invoice.getCreatedAt().getYear();
 
