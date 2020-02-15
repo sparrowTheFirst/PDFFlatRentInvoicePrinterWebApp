@@ -2,7 +2,6 @@ package org.example.service;
 
 import org.example.model.Contractor;
 import org.example.model.Invoice;
-import org.example.model.Salesman;
 import org.example.repository.InvoiceRepository;
 import org.example.repository.SalesmanRepository;
 import org.example.utilities.ApartmentType;

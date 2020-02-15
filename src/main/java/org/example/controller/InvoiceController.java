@@ -4,6 +4,7 @@ import org.example.model.Invoice;
 import org.example.service.ContractorService;
 import org.example.service.InvoiceService;
 import org.example.utilities.PDFCreator;
+import org.example.utilities.SystemDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDate;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/invoice")
@@ -32,12 +33,18 @@ public class InvoiceController {
 
     @GetMapping("/add")
     public String getCreateInvoicePage(Model model) {
-        model.addAttribute("invoice", Invoice.builder().createdAt(LocalDate.now()).build());
+        model.addAttribute(
+                "invoice",
+                Invoice.builder()
+                        .createdAt(SystemDateTime.getDateNow())
+                        .soldAt(SystemDateTime.getDateNow())
+                        .build()
+        );
         return "invoiceCreate";
     }
 
     @PostMapping("/add")
-    public String postCreateInvoicePage(Model model, @ModelAttribute Invoice invoice) {
+    public String postCreateInvoicePage(Model model, @Valid @ModelAttribute Invoice invoice) {
         invoiceService.fillInvoicesWithContractors(invoice, contractorService.allContractors());
         model.addAttribute("invoices", invoiceService.allInvoices());
         return "invoiceHome";

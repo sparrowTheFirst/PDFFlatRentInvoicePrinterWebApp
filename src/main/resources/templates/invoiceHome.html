@@ -16,9 +16,10 @@
         <li>
             <p th:text="'Invoice signature: ' + ${invoice.signature}">invoice signature</p>
             <p th:text="'Invoice date: ' + ${invoice.createdAt}">invoice createdAt</p>
+            <p th:text="'Sold date: ' + ${invoice.soldAt}">invoice soldAt</p>
             <p th:text="'Invoice salesman: ' + ${invoice.salesman.companyName} + ' | ' + ${invoice.salesman.postcode} + ' ' + ${invoice.salesman.city} + ' | ' + ${invoice.salesman.address}">invoice salesman companyName</p>
             <p th:text="'Invoice contractor: ' + ${invoice.contractor.lastName} + ' ' + ${invoice.contractor.firstName} + ' | ' + ${invoice.contractor.postcode} + ' ' + ${invoice.contractor.city} + ' | ' + ${invoice.contractor.address}">invoice contractor</p>
-            <p th:text="'Rent period: ' + ${invoice.period} + ' for price: ' + ${invoice.contractor.amount}">rent period and price</p>
+            <p th:text="'Rent period: ' + ${invoice.period} + '-' + ${invoice.createdAt.year} + ' for price: ' + ${invoice.contractor.amount}">rent period and price</p>
         </li>
     </ul>
 </div>

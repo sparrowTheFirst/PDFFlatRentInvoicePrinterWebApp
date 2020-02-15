@@ -15,7 +15,8 @@ import org.example.model.Invoice;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PDFCreator {
@@ -24,13 +25,12 @@ public class PDFCreator {
     private static String PDF_DOCUMENTS_DIRECTORY_NAME = PDF_DOCUMENTS_PATH + "printedOn_";
     private static String PDF_DOCUMENT_FILE_NAME;
 
-
     public static void print(List<Invoice> invoices) {
         try {
             File directory = new File(PDF_DOCUMENTS_DIRECTORY_NAME
-                    + getDateTimeNow().getDayOfMonth() + "_" + getDateTimeNow().getMonthValue() + "_" + getDateTimeNow().getYear()
+                    + SystemDateTime.getDateTimeNow().getDayOfMonth() + "_" + SystemDateTime.getDateTimeNow().getMonthValue() + "_" + SystemDateTime.getDateTimeNow().getYear()
                     + "_"
-                    + getDateTimeNow().getHour() + "_" + getDateTimeNow().getMinute() + "_" + getDateTimeNow().getSecond());
+                    + SystemDateTime.getDateTimeNow().getHour() + "_" + SystemDateTime.getDateTimeNow().getMinute() + "_" + SystemDateTime.getDateTimeNow().getSecond());
             if (!directory.exists()) {
                 directory.mkdirs();
             }
@@ -42,7 +42,7 @@ public class PDFCreator {
                 final String BUYER_FIELD_NAME = "nabywca:".toUpperCase();
                 final String BUYER_DATA = invoice.getContractor().getFirstName().toUpperCase() + " " + invoice.getContractor().getLastName().toUpperCase() + "\n" + invoice.getContractor().getPostcode() + " " + invoice.getContractor().getCity().toUpperCase() + "\n" + invoice.getContractor().getAddress().toUpperCase() + "\ndodac nr mieszkania".toUpperCase();
                 final String ORIGINAL_COPY_TEXT = "oryginal / kopia";
-                final String SERVICE_CONTENT_TEXT = "CZYNSZ ZA LOKAL\nMIESZKALNY ZA MIESZIAC\n" + invoice.getPeriod().toUpperCase();
+                final String SERVICE_CONTENT_TEXT = "CZYNSZ ZA LOKAL\nMIESZKALNY ZA MIESIAC\n" + invoice.getPeriod() + "-" + invoice.getCreatedAt().getYear();
 
                 Document document = new Document(PageSize.A4);
                 PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
@@ -61,7 +61,7 @@ public class PDFCreator {
                 document.open();
 
                 //paragraphs
-                Paragraph signature = new Paragraph("Rachunek:\n" + "NR " + invoice.getSignature() + "\nData wystawienia: " + invoice.getCreatedAt().toString(), boldFont);
+                Paragraph signature = new Paragraph("Rachunek:\n" + "NR " + invoice.getSignature() + "\nData wystawienia: " + getFormattedData(invoice.getCreatedAt()) + "\nData sprzedazy: " + getFormattedData(invoice.getSoldAt()), boldFont);
                 Paragraph salesman = new Paragraph(SALESMAN_DATA, boldFont);
                 Paragraph buyerField = new Paragraph(BUYER_FIELD_NAME, boldFont);
                 Paragraph buyer = new Paragraph(BUYER_DATA, boldFont);
@@ -71,7 +71,7 @@ public class PDFCreator {
                 Paragraph serviceContentParagraph = new Paragraph(SERVICE_CONTENT_TEXT, normalSize8Font);
 
                 //first row
-                int firstRowHeight = 40;
+                int firstRowHeight = 55;
                 PdfPTable firstRow = new PdfPTable(2);
                 PdfPCell firstRowCell = new PdfPCell();
                 firstRowCell.setMinimumHeight(firstRowHeight);
@@ -184,7 +184,7 @@ public class PDFCreator {
                 fourthRow.addCell(cell);
 
                 //sixth row
-                int sixthRowHeight = 30;
+                int sixthRowHeight = 25;
                 cell = new PdfPCell();
                 cell.setMinimumHeight(sixthRowHeight);
                 cell.setColspan(8);
@@ -220,7 +220,7 @@ public class PDFCreator {
                 cell.setMinimumHeight(seventhRowHeight);
                 cell.setColspan(7);
                 cell.addElement(phrase);
-                phrase = new Paragraph("data wystawienia".toUpperCase(), italicFont);
+                phrase = new Paragraph(getFormattedData(invoice.getSoldAt()), italicFont);
                 cell.addElement(phrase);
                 fourthRow.addCell(cell);
 
@@ -313,7 +313,8 @@ public class PDFCreator {
         }
     }
 
-    private static LocalDateTime getDateTimeNow() {
-        return LocalDateTime.now();
+    private static String getFormattedData(LocalDate date) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return dateTimeFormatter.format(date);
     }
 }
