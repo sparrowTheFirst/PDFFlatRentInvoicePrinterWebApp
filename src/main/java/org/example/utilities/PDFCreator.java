@@ -60,83 +60,87 @@ public class PDFCreator {
                 //write document open
                 document.open();
 
-                //paragraphs
-                Paragraph signature = new Paragraph("Rachunek:\n" + "NR " + invoice.getSignature() + "\nData wystawienia: " + getFormattedData(invoice.getCreatedAt()) + "\nData sprzedazy: " + getFormattedData(invoice.getSoldAt()), boldFont);
-                Paragraph salesman = new Paragraph(SALESMAN_DATA, boldFont);
-                Paragraph buyerField = new Paragraph(BUYER_FIELD_NAME, boldFont);
-                Paragraph buyer = new Paragraph(BUYER_DATA, boldFont);
-                Paragraph originalCopyParagraph = new Paragraph(ORIGINAL_COPY_TEXT.toUpperCase(), new Font(Font.FontFamily.HELVETICA, 6, Font.ITALIC));
-                originalCopyParagraph.setAlignment(Element.ALIGN_MIDDLE);
-                originalCopyParagraph.setAlignment(Element.ALIGN_CENTER);
-                Paragraph serviceContentParagraph = new Paragraph(SERVICE_CONTENT_TEXT, normalSize8Font);
+                //table
+                PdfPTable table = new PdfPTable(15);
+                table.setWidthPercentage(100);
 
                 //first row
                 int firstRowHeight = 55;
-                PdfPTable firstRow = new PdfPTable(2);
-                PdfPCell firstRowCell = new PdfPCell();
-                firstRowCell.setMinimumHeight(firstRowHeight);
-                firstRowCell.addElement(salesman);
-                firstRow.addCell(firstRowCell);
-                firstRowCell = new PdfPCell();
-                firstRowCell.setMinimumHeight(firstRowHeight);
-                firstRowCell.addElement(signature);
-                firstRow.addCell(firstRowCell);
+                Paragraph phrase = new Paragraph(SALESMAN_DATA, boldFont);
+                PdfPCell cell = new PdfPCell();
+                cell.setMinimumHeight(firstRowHeight);
+                cell.setColspan(8);
+                cell.addElement(phrase);
+                table.addCell(cell);
+                phrase = new Paragraph("Rachunek:\n" + "NR " + invoice.getSignature() + "\nData wystawienia: " + getFormattedData(invoice.getCreatedAt()) + "\nData sprzedazy: " + getFormattedData(invoice.getSoldAt()), boldFont);
+                cell = new PdfPCell();
+                cell.setMinimumHeight(firstRowHeight);
+                cell.setColspan(7);
+                cell.addElement(phrase);
+                table.addCell(cell);
 
                 //second row
                 int secondRowHeight = 20;
-                PdfPCell secondRow = new PdfPCell();
-                secondRow.setMinimumHeight(secondRowHeight);
-                secondRow.addElement(originalCopyParagraph);
+                phrase = new Paragraph(ORIGINAL_COPY_TEXT.toUpperCase(), new Font(Font.FontFamily.HELVETICA, 6, Font.ITALIC));
+                phrase.setAlignment(Element.ALIGN_MIDDLE);
+                phrase.setAlignment(Element.ALIGN_CENTER);
+                cell = new PdfPCell();
+                cell.setMinimumHeight(secondRowHeight);
+                cell.setColspan(15);
+                cell.addElement(phrase);
+                table.addCell(cell);
 
                 //third row
                 int thirdRowHeight = 60;
-                PdfPTable thirdRow = new PdfPTable(2);
-                PdfPCell cell = new PdfPCell();
-                cell.setMinimumHeight(thirdRowHeight);
-                cell.addElement(buyerField);
-                thirdRow.addCell(cell);
+                phrase = new Paragraph(BUYER_FIELD_NAME, boldFont);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(thirdRowHeight);
-                cell.addElement(buyer);
-                thirdRow.addCell(cell);
+                cell.setColspan(3);
+                cell.addElement(phrase);
+                table.addCell(cell);
+                phrase = new Paragraph(BUYER_DATA, boldFont);
+                cell = new PdfPCell();
+                cell.setMinimumHeight(thirdRowHeight);
+                cell.setColspan(12);
+                cell.addElement(phrase);
+                table.addCell(cell);
 
                 //fourth row
-                PdfPTable fourthRow = new PdfPTable(15);
-                Paragraph phrase = new Paragraph("L.P.", boldFont);
+                phrase = new Paragraph("L.P.", boldFont);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
                 phrase = new Paragraph("NAZWA TOWARU/USLUGi", boldFont);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.addElement(phrase);
                 cell.setColspan(5);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
                 phrase = new Paragraph("ILOSC", boldFont);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.setColspan(2);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
                 phrase = new Paragraph("J.M.", boldFont);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
                 phrase = new Paragraph("CENA JEDNOSTKOWA", boldFont);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.setColspan(3);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
                 phrase = new Paragraph("WARTOSC", boldFont);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
                 cell.setColspan(3);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 //fifth row
                 int fifthRowHeight = 50;
@@ -145,13 +149,14 @@ public class PDFCreator {
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
+                phrase = new Paragraph(SERVICE_CONTENT_TEXT, normalSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
-                cell.addElement(serviceContentParagraph);
+                cell.addElement(phrase);
                 cell.setColspan(5);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph("1", normalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
@@ -159,13 +164,13 @@ public class PDFCreator {
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.setColspan(2);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph("ZEST", normalSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
@@ -173,7 +178,7 @@ public class PDFCreator {
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.setColspan(3);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
@@ -181,28 +186,28 @@ public class PDFCreator {
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.setColspan(3);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 //sixth row
                 int sixthRowHeight = 25;
                 cell = new PdfPCell();
                 cell.setMinimumHeight(sixthRowHeight);
                 cell.setColspan(8);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph("RAZEM:", boldFont);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
                 cell.setColspan(4);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setColspan(3);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 //seventh row
                 int seventhRowHeight = 40;
@@ -213,7 +218,7 @@ public class PDFCreator {
                 cell.addElement(phrase);
                 phrase = new Paragraph("gotowka".toUpperCase(), italicFont);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph("termin:".toUpperCase(), boldFont);
                 cell = new PdfPCell();
@@ -222,7 +227,7 @@ public class PDFCreator {
                 cell.addElement(phrase);
                 phrase = new Paragraph(getFormattedData(invoice.getSoldAt()), italicFont);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 //eighth row
                 int eighthRowHeight = 40;
@@ -234,7 +239,7 @@ public class PDFCreator {
                 phrase = new Paragraph("slownie: ".toUpperCase() + "kwota slownie do ustawienia".toUpperCase(), italicFont);
                 phrase.setIndentationLeft(30);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph(invoice.getContractor().getAmount() + " PLN", boldFont);
                 phrase.setAlignment(Element.ALIGN_CENTER);
@@ -242,7 +247,7 @@ public class PDFCreator {
                 cell.setMinimumHeight(eighthRowHeight);
                 cell.setColspan(4);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 //ninth row
                 int ninthRowHeight = 45;
@@ -253,12 +258,12 @@ public class PDFCreator {
                 cell.setMinimumHeight(ninthRowHeight);
                 cell.setColspan(5);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 cell = new PdfPCell();
                 cell.setMinimumHeight(ninthRowHeight);
                 cell.setColspan(5);
-                fourthRow.addCell(cell);
+                table.addCell(cell);
 
                 phrase = new Paragraph("(podpis kupca)".toUpperCase(), normalSize6Font);
                 phrase.setAlignment(Element.ALIGN_TOP);
@@ -267,23 +272,7 @@ public class PDFCreator {
                 cell.setMinimumHeight(ninthRowHeight);
                 cell.setColspan(5);
                 cell.addElement(phrase);
-                fourthRow.addCell(cell);
-
-                //two tables of same content
-                PdfPTable tableTop = new PdfPTable(1);
-                PdfPTable tableBottom = new PdfPTable(1);
-
-                tableTop.setWidthPercentage(100);
-                tableBottom.setWidthPercentage(100);
-
-                tableTop.addCell(firstRow);
-                tableTop.addCell(secondRow);
-                tableTop.addCell(thirdRow);
-                tableTop.addCell(fourthRow);
-                tableBottom.addCell(firstRow);
-                tableBottom.addCell(secondRow);
-                tableBottom.addCell(thirdRow);
-                tableBottom.addCell(fourthRow);
+                table.addCell(cell);
 
                 //big divs
                 PdfDiv divTop = new PdfDiv();
@@ -299,8 +288,8 @@ public class PDFCreator {
                 divBottom.setPaddingRight(30);
                 divBottom.setPaddingBottom(10);
 
-                divTop.addElement(tableTop);
-                divBottom.addElement(tableBottom);
+                divTop.addElement(table);
+                divBottom.addElement(table);
 
                 //document
                 document.add(divTop);
