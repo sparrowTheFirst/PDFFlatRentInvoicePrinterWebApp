@@ -28,6 +28,7 @@ public class ContractorController {
         if (!file.isEmpty()) {
             try {
                 contractorService.getContractors(file.getInputStream());
+                contractorService.setContractorsIndex();
             } catch (Exception e) {
             }
         }

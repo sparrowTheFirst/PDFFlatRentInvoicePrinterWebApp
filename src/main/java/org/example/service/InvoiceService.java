@@ -11,4 +11,5 @@ public interface InvoiceService {
     void addInvoice(Invoice invoice);
     void clearInvoices();
     void fillInvoicesWithContractors(Invoice invoice, List<Contractor> contractors);
+    void fillInvoiceWithContractor(Invoice invoice, Contractor contractor);
 }

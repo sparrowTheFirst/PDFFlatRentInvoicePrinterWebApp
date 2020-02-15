@@ -20,7 +20,7 @@
 
     <ul th:each="contractor : ${contractors}">
         <li>
-            <p th:text="${contractor.firstName} + ' ' + ${contractor.lastName}">contractor firstName and lastName</p>
+            <p th:text="${contractor.index} + ' ' + ${contractor.firstName} + ' ' + ${contractor.lastName}">contractor firstName and lastName</p>
             <p th:text="${contractor.postcode} + ' ' + ${contractor.city}">contractor postcode and city</p>
             <p th:text="${contractor.address}">contractor address</p>
             <p th:text="${contractor.apartmentNumber} + ' ' +${contractor.apartmentType} + ' ' + ${contractor.amount}">contractor postcode and city</p>

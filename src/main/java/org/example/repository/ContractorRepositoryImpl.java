@@ -24,6 +24,11 @@ public class ContractorRepositoryImpl implements ContractorRepository {
     }
 
     @Override
+    public Contractor getContractorById(int index) {
+        return contractors.get(index);
+    }
+
+    @Override
     public void clearContractorsRepository() {
         contractors.clear();
     }

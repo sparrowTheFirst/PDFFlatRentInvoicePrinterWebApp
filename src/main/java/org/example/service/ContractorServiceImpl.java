@@ -25,7 +25,21 @@ public class ContractorServiceImpl implements ContractorService {
     }
 
     @Override
+    public Contractor getContractorById(int index) {
+        return contractorRepository.getContractorById(index);
+    }
+
+    @Override
     public void clearContractors() {
         contractorRepository.clearContractorsRepository();
+    }
+
+    @Override
+    public void setContractorsIndex() {
+        for (int i = 0; i < contractorRepository.allContractors().size(); i++) {
+            if (allContractors().get(i).getIndex() == null) {
+                contractorRepository.allContractors().get(i).setIndex(Long.valueOf(i));
+            }
+        }
     }
 }

@@ -9,5 +9,7 @@ public interface ContractorService {
 
     List<Contractor> allContractors();
     void getContractors(InputStream inputStream);
+    Contractor getContractorById(int index);
     void clearContractors();
+    void setContractorsIndex();
 }

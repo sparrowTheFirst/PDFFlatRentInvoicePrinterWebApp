@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.model.Contractor;
 import org.example.model.Invoice;
 import org.example.service.ContractorService;
 import org.example.service.InvoiceService;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/invoice")
@@ -40,11 +43,31 @@ public class InvoiceController {
                         .soldAt(SystemDateTime.getDateNow())
                         .build()
         );
+        model.addAttribute("contractors", contractorService.allContractors());
         return "invoiceCreate";
     }
 
     @PostMapping("/add")
-    public String postCreateInvoicePage(Model model, @Valid @ModelAttribute Invoice invoice) {
+    public String postCreateInvoice(Model model, @ModelAttribute Invoice invoice, @RequestParam String contractorId) {
+        invoiceService.fillInvoiceWithContractor(invoice, contractorService.getContractorById(Integer.parseInt(contractorId)));
+        model.addAttribute("invoices", invoiceService.allInvoices());
+        return "invoiceHome";
+    }
+
+    @GetMapping("/addBatch")
+    public String getCreateInvoicesBatchPage(Model model) {
+        model.addAttribute(
+                "invoice",
+                Invoice.builder()
+                        .createdAt(SystemDateTime.getDateNow())
+                        .soldAt(SystemDateTime.getDateNow())
+                        .build()
+        );
+        return "invoiceBatchCreate";
+    }
+
+    @PostMapping("/addBatch")
+    public String postCreateInvoicesBatch(Model model, @Valid @ModelAttribute Invoice invoice) {
         invoiceService.fillInvoicesWithContractors(invoice, contractorService.allContractors());
         model.addAttribute("invoices", invoiceService.allInvoices());
         return "invoiceHome";

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:include="navbar :: head">
     <meta charset="UTF-8"/>
-    <title>Create Invoice Page</title>
+    <title>Create Invoices Batch Page</title>
 </head>
 <body>
 
@@ -11,11 +11,7 @@
 <div class="container">
     <h1>Invoice Creator:</h1>
 
-    <datalist id="contractors">
-        <option th:each="contractor, itemStat : ${contractors}" th:value="__${itemStat.index}__" th:label="${contractor.firstName} + ' ' + ${contractor.lastName}"></option>
-    </datalist>
-
-    <form th:action="@{/invoice/add}" method="post" th:object="${invoice}">
+    <form th:action="@{/invoice/addBatch}" method="post" th:object="${invoice}">
         <div class="row">
             <label for="createdAt">Invoice Date:</label>
             <input id="createdAt" type="date" th:value="*{createdAt}" th:field="*{createdAt}"/>
@@ -42,11 +38,6 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
             </select>
-        </div>
-
-        <div class="row">
-            <label for="contractor">Contractor:</label>
-            <input id="contractor" list="contractors" name="contractorId"/>
         </div>
 
         <button type="submit">Create Invoice Batch</button>

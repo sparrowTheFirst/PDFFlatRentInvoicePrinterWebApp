@@ -9,5 +9,6 @@ public interface ContractorRepository {
 
     List<Contractor> allContractors();
     void getContractors(InputStream inputStream);
+    Contractor getContractorById(int index);
     void clearContractorsRepository();
 }
