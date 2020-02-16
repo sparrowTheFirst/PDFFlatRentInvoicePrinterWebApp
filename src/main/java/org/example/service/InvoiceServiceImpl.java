@@ -6,6 +6,7 @@ import org.example.repository.ContractorRepository;
 import org.example.repository.InvoiceRepository;
 import org.example.repository.SalesmanRepository;
 import org.example.utilities.ApartmentType;
+import org.example.utilities.NumberConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .period(invoice.getPeriod())
                     .salesman(salesmanRepository.getSalesman(0))
                     .contractor(contractor)
+                    .amountInWords(NumberConverter.getAmountInWords(invoice.getContractor().getAmount()))
                     .build());
         }
     }
@@ -58,6 +60,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .period(invoice.getPeriod())
                 .salesman(salesmanRepository.getSalesman(0))
                 .contractor(contractor)
+                .amountInWords(NumberConverter.getAmountInWords(invoice.getContractor().getAmount()))
                 .build());
     }
 

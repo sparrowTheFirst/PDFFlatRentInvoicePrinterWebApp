@@ -6,6 +6,7 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfDiv;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -41,15 +42,17 @@ public class PDFCreator {
                 final String SALESMAN_DATA = "Sprzedawca: \n" + invoice.getSalesman().getCompanyName().toUpperCase() + "\n" + invoice.getSalesman().getPostcode() + " " + invoice.getSalesman().getCity().toUpperCase() + "\n" + invoice.getSalesman().getAddress().toUpperCase();
                 final String BUYER_FIELD_NAME = "nabywca:".toUpperCase();
                 final String BUYER_DATA = invoice.getContractor().getFirstName().toUpperCase() + " " + invoice.getContractor().getLastName().toUpperCase() + "\n" + invoice.getContractor().getPostcode() + " " + invoice.getContractor().getCity().toUpperCase() + "\n" + invoice.getContractor().getAddress().toUpperCase() + "\nmieszkanie nr ".toUpperCase() + invoice.getContractor().getApartmentNumber();
-                final String ORIGINAL_COPY_TEXT = "oryginal / kopia";
+                final String ORIGINAL_COPY_TEXT = "oryginał / kopia";
                 final String SERVICE_CONTENT_TEXT = "CZYNSZ ZA LOKAL\nMIESZKALNY ZA MIESIAC\n" + invoice.getPeriod() + "-" + invoice.getCreatedAt().getYear();
 
                 Document document = new Document(PageSize.A4);
                 PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
                 pdfWriter.setPdfVersion(PdfWriter.VERSION_1_7);
                 pdfWriter.setTagged();
+                pdfWriter.setLanguage("pl-PL");
                 pdfWriter.setViewerPreferences(PdfWriter.DisplayDocTitle);
-                document.addLanguage("en-US");
+//                document.addLanguage("en-US");
+                document.addLanguage("pl-PL");
                 document.addTitle("Faktura: " + invoice.getSignature());
                 pdfWriter.createXmpMetadata();
                 Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
@@ -236,7 +239,7 @@ public class PDFCreator {
                 cell.setMinimumHeight(eighthRowHeight);
                 cell.setColspan(11);
                 cell.addElement(phrase);
-                phrase = new Paragraph("slownie: ".toUpperCase() + "kwota slownie do ustawienia".toUpperCase(), italicFont);
+                phrase = new Paragraph("slownie: ".toUpperCase() + invoice.getAmountInWords(), italicFont);
                 phrase.setIndentationLeft(30);
                 cell.addElement(phrase);
                 table.addCell(cell);
