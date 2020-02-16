@@ -46,7 +46,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .period(invoice.getPeriod())
                     .salesman(salesmanRepository.getSalesman(0))
                     .contractor(contractor)
-                    .amountInWords(NumberConverter.getAmountInWords(invoice.getContractor().getAmount()))
                     .build());
         }
     }
@@ -60,7 +59,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .period(invoice.getPeriod())
                 .salesman(salesmanRepository.getSalesman(0))
                 .contractor(contractor)
-                .amountInWords(NumberConverter.getAmountInWords(invoice.getContractor().getAmount()))
                 .build());
     }
 

@@ -25,7 +25,6 @@ public class Invoice {
     private String period;
     private Salesman salesman;
     private Contractor contractor;
-    private String amountInWords;
 
     public LocalDate getSoldAt() {
         return createdAt.plus(Period.ofDays(14));

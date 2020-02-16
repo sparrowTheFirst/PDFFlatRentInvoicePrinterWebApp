@@ -33,7 +33,7 @@ public class NumberConverter {
                 }
             }
         }
-        result.append("złotych " + decimalValue + "/100");
+        result.append("złotych " + decimalValue + "/100 groszy");
         return result.toString();
     }
 }

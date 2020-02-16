@@ -39,26 +39,27 @@ public class PDFCreator {
                 PDF_DOCUMENT_FILE_NAME = invoice.getSignature().replace("/", "_") + ".pdf";
                 File pdfFile = new File(directory.getAbsolutePath() + "\\" + PDF_DOCUMENT_FILE_NAME);
 
-                final String SALESMAN_DATA = "Sprzedawca: \n" + invoice.getSalesman().getCompanyName().toUpperCase() + "\n" + invoice.getSalesman().getPostcode() + " " + invoice.getSalesman().getCity().toUpperCase() + "\n" + invoice.getSalesman().getAddress().toUpperCase();
+                final String SALESMAN_DATA = "sprzedawca: \n".toUpperCase() + invoice.getSalesman().getCompanyName().toUpperCase() + "\n" + invoice.getSalesman().getPostcode() + " " + invoice.getSalesman().getCity().toUpperCase() + "\n" + invoice.getSalesman().getAddress().toUpperCase();
                 final String BUYER_FIELD_NAME = "nabywca:".toUpperCase();
                 final String BUYER_DATA = invoice.getContractor().getFirstName().toUpperCase() + " " + invoice.getContractor().getLastName().toUpperCase() + "\n" + invoice.getContractor().getPostcode() + " " + invoice.getContractor().getCity().toUpperCase() + "\n" + invoice.getContractor().getAddress().toUpperCase() + "\nmieszkanie nr ".toUpperCase() + invoice.getContractor().getApartmentNumber();
                 final String ORIGINAL_COPY_TEXT = "oryginał / kopia";
-                final String SERVICE_CONTENT_TEXT = "CZYNSZ ZA LOKAL\nMIESZKALNY ZA MIESIAC\n" + invoice.getPeriod() + "-" + invoice.getCreatedAt().getYear();
+                final String SERVICE_CONTENT_TEXT = "czynsz za lokal\nmieszkalny za miesiąc\n".toUpperCase() + invoice.getPeriod() + "-" + invoice.getCreatedAt().getYear();
 
                 Document document = new Document(PageSize.A4);
                 PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
                 pdfWriter.setPdfVersion(PdfWriter.VERSION_1_7);
                 pdfWriter.setTagged();
-                pdfWriter.setLanguage("pl-PL");
                 pdfWriter.setViewerPreferences(PdfWriter.DisplayDocTitle);
-//                document.addLanguage("en-US");
                 document.addLanguage("pl-PL");
                 document.addTitle("Faktura: " + invoice.getSignature());
                 pdfWriter.createXmpMetadata();
-                Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
-                Font normalSize8Font = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.NORMAL);
-                Font normalSize6Font = new Font(Font.FontFamily.TIMES_ROMAN, 6, Font.NORMAL);
-                Font italicFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.ITALIC);
+                BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/times.ttf", BaseFont.CP1257, BaseFont.EMBEDDED);
+                Font timesNewRomanNormalSize8Font = new Font(baseFont, 8, Font.NORMAL);
+                Font timesNewRomanBoldSize8Font = new Font(baseFont, 8, Font.BOLD);
+                Font timesNewRomanItalicSize8Font = new Font(baseFont, 8, Font.ITALIC);
+                Font timesNewRomanNormalSize6Font = new Font(baseFont, 6, Font.NORMAL);
+                baseFont = BaseFont.createFont("c:/windows/fonts/verdana.ttf", BaseFont.CP1257, BaseFont.EMBEDDED);
+                Font verdanaItalicSize8Font = new Font(baseFont, 8, Font.ITALIC);
 
                 //write document open
                 document.open();
@@ -69,13 +70,13 @@ public class PDFCreator {
 
                 //first row
                 int firstRowHeight = 55;
-                Paragraph phrase = new Paragraph(SALESMAN_DATA, boldFont);
+                Paragraph phrase = new Paragraph(SALESMAN_DATA, timesNewRomanBoldSize8Font);
                 PdfPCell cell = new PdfPCell();
                 cell.setMinimumHeight(firstRowHeight);
                 cell.setColspan(8);
                 cell.addElement(phrase);
                 table.addCell(cell);
-                phrase = new Paragraph("Rachunek:\n" + "NR " + invoice.getSignature() + "\nData wystawienia: " + getFormattedData(invoice.getCreatedAt()) + "\nData sprzedazy: " + getFormattedData(invoice.getSoldAt()), boldFont);
+                phrase = new Paragraph("Rachunek:\n" + "NR " + invoice.getSignature() + "\nData wystawienia: " + getFormattedData(invoice.getCreatedAt()) + "\nData sprzedaży: " + getFormattedData(invoice.getSoldAt()), timesNewRomanBoldSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(firstRowHeight);
                 cell.setColspan(7);
@@ -84,7 +85,7 @@ public class PDFCreator {
 
                 //second row
                 int secondRowHeight = 20;
-                phrase = new Paragraph(ORIGINAL_COPY_TEXT.toUpperCase(), new Font(Font.FontFamily.HELVETICA, 6, Font.ITALIC));
+                phrase = new Paragraph(ORIGINAL_COPY_TEXT.toUpperCase(), verdanaItalicSize8Font);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
@@ -95,13 +96,13 @@ public class PDFCreator {
 
                 //third row
                 int thirdRowHeight = 60;
-                phrase = new Paragraph(BUYER_FIELD_NAME, boldFont);
+                phrase = new Paragraph(BUYER_FIELD_NAME, timesNewRomanBoldSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(thirdRowHeight);
                 cell.setColspan(3);
                 cell.addElement(phrase);
                 table.addCell(cell);
-                phrase = new Paragraph(BUYER_DATA, boldFont);
+                phrase = new Paragraph(BUYER_DATA, timesNewRomanBoldSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(thirdRowHeight);
                 cell.setColspan(12);
@@ -109,35 +110,35 @@ public class PDFCreator {
                 table.addCell(cell);
 
                 //fourth row
-                phrase = new Paragraph("L.P.", boldFont);
+                phrase = new Paragraph("l.p.".toUpperCase(), timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.addElement(phrase);
                 table.addCell(cell);
-                phrase = new Paragraph("NAZWA TOWARU/USLUGi", boldFont);
+                phrase = new Paragraph("nazwa towaru / usługi".toUpperCase(), timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.addElement(phrase);
                 cell.setColspan(5);
                 table.addCell(cell);
-                phrase = new Paragraph("ILOSC", boldFont);
+                phrase = new Paragraph("ilość".toUpperCase(), timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.setColspan(2);
                 cell.addElement(phrase);
                 table.addCell(cell);
-                phrase = new Paragraph("J.M.", boldFont);
+                phrase = new Paragraph("j.m.".toUpperCase(), timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.addElement(phrase);
                 table.addCell(cell);
-                phrase = new Paragraph("CENA JEDNOSTKOWA", boldFont);
+                phrase = new Paragraph("cena jednostkowa".toUpperCase(), timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 cell = new PdfPCell();
                 cell.setColspan(3);
                 cell.addElement(phrase);
                 table.addCell(cell);
-                phrase = new Paragraph("WARTOSC", boldFont);
+                phrase = new Paragraph("wartość".toUpperCase(), timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_MIDDLE);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
@@ -147,21 +148,21 @@ public class PDFCreator {
 
                 //fifth row
                 int fifthRowHeight = 50;
-                phrase = new Paragraph("1", normalSize8Font);
+                phrase = new Paragraph("1", timesNewRomanNormalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.addElement(phrase);
                 table.addCell(cell);
 
-                phrase = new Paragraph(SERVICE_CONTENT_TEXT, normalSize8Font);
+                phrase = new Paragraph(SERVICE_CONTENT_TEXT, timesNewRomanNormalSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.addElement(phrase);
                 cell.setColspan(5);
                 table.addCell(cell);
 
-                phrase = new Paragraph("1", normalSize8Font);
+                phrase = new Paragraph("1", timesNewRomanNormalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
@@ -169,13 +170,13 @@ public class PDFCreator {
                 cell.addElement(phrase);
                 table.addCell(cell);
 
-                phrase = new Paragraph("ZEST", normalSize8Font);
+                phrase = new Paragraph("zest".toUpperCase(), timesNewRomanNormalSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
                 cell.addElement(phrase);
                 table.addCell(cell);
 
-                phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
+                phrase = new Paragraph(invoice.getContractor().getAmount(), timesNewRomanNormalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
@@ -183,7 +184,7 @@ public class PDFCreator {
                 cell.addElement(phrase);
                 table.addCell(cell);
 
-                phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
+                phrase = new Paragraph(invoice.getContractor().getAmount(), timesNewRomanNormalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(fifthRowHeight);
@@ -198,14 +199,14 @@ public class PDFCreator {
                 cell.setColspan(8);
                 table.addCell(cell);
 
-                phrase = new Paragraph("RAZEM:", boldFont);
+                phrase = new Paragraph("razem:".toUpperCase(), timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
                 cell.setColspan(4);
                 cell.addElement(phrase);
                 table.addCell(cell);
 
-                phrase = new Paragraph(invoice.getContractor().getAmount(), normalSize8Font);
+                phrase = new Paragraph(invoice.getContractor().getAmount(), timesNewRomanNormalSize8Font);
                 phrase.setAlignment(Element.ALIGN_RIGHT);
                 cell = new PdfPCell();
                 cell.setColspan(3);
@@ -214,37 +215,37 @@ public class PDFCreator {
 
                 //seventh row
                 int seventhRowHeight = 40;
-                phrase = new Paragraph("forma platnosci:".toUpperCase(), boldFont);
+                phrase = new Paragraph("forma płatności:".toUpperCase(), timesNewRomanBoldSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(seventhRowHeight);
                 cell.setColspan(8);
                 cell.addElement(phrase);
-                phrase = new Paragraph("gotowka".toUpperCase(), italicFont);
+                phrase = new Paragraph("gotówka".toUpperCase(), timesNewRomanItalicSize8Font);
                 cell.addElement(phrase);
                 table.addCell(cell);
 
-                phrase = new Paragraph("termin:".toUpperCase(), boldFont);
+                phrase = new Paragraph("termin:".toUpperCase(), timesNewRomanBoldSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(seventhRowHeight);
                 cell.setColspan(7);
                 cell.addElement(phrase);
-                phrase = new Paragraph(getFormattedData(invoice.getSoldAt()), italicFont);
+                phrase = new Paragraph(getFormattedData(invoice.getSoldAt()), timesNewRomanItalicSize8Font);
                 cell.addElement(phrase);
                 table.addCell(cell);
 
                 //eighth row
                 int eighthRowHeight = 40;
-                phrase = new Paragraph("razem do zaplaty:".toUpperCase(), boldFont);
+                phrase = new Paragraph("razem do zapłaty:".toUpperCase(), timesNewRomanBoldSize8Font);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(eighthRowHeight);
                 cell.setColspan(11);
                 cell.addElement(phrase);
-                phrase = new Paragraph("slownie: ".toUpperCase() + invoice.getAmountInWords(), italicFont);
+                phrase = new Paragraph("słownie: ".toUpperCase() + NumberConverter.getAmountInWords(invoice.getContractor().getAmount()), timesNewRomanItalicSize8Font);
                 phrase.setIndentationLeft(30);
                 cell.addElement(phrase);
                 table.addCell(cell);
 
-                phrase = new Paragraph(invoice.getContractor().getAmount() + " PLN", boldFont);
+                phrase = new Paragraph(invoice.getContractor().getAmount() + " PLN", timesNewRomanBoldSize8Font);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
                 cell.setMinimumHeight(eighthRowHeight);
@@ -254,7 +255,7 @@ public class PDFCreator {
 
                 //ninth row
                 int ninthRowHeight = 45;
-                phrase = new Paragraph("(podpis sprzdawcy)".toUpperCase(), normalSize6Font);
+                phrase = new Paragraph("(podpis sprzedającego)".toUpperCase(), timesNewRomanNormalSize6Font);
                 phrase.setAlignment(Element.ALIGN_TOP);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
@@ -268,7 +269,7 @@ public class PDFCreator {
                 cell.setColspan(5);
                 table.addCell(cell);
 
-                phrase = new Paragraph("(podpis kupca)".toUpperCase(), normalSize6Font);
+                phrase = new Paragraph("(podpis kupującego)".toUpperCase(), timesNewRomanNormalSize6Font);
                 phrase.setAlignment(Element.ALIGN_TOP);
                 phrase.setAlignment(Element.ALIGN_CENTER);
                 cell = new PdfPCell();
