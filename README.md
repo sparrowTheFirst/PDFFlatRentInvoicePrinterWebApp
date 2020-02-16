@@ -7,17 +7,33 @@ Invoice of flat renting
 `mvn spring-boot:run`  
 3. Open given URL address in browser: `http://localhost:8081`  
 ### CSV File construction rules
-* data record = line
-* example of contractor record: `firstName,lastName,address,postcode,city`
-* validated separators: `;` and `,`
-* validated file extensions: `.txt .csv` 
-* used no extra spaces before and after every record 
-##### Example of Contractor record:  
-`john,smith,street 12,PO3 1AX,12-222,London`
+* data record = line    
+* validated data file separator: `;`
+* validated data file extension: `.csv` 
+* used no extra spaces before and after every line of record
+* salesman record fields: 
+
+    `companyName;address;postcode;city`
+    
+* example of `Salesman` record:
+
+    `smithCompany;London Street 12;PO3 1AX;12-222;London`
+        
+* contractor record fields: 
+
+    `firstName;lastName;address;postcode;city;apartmentType;amountOfPayment;apartmentNumber`
+
+* example of `Contractor` record:  
+
+    `john;smith;London Street 12;PO3 1AX;12-222;London;M;369,45;12`
+    
 ### Using Application with contractors from CSV file
 1. Open `http://localhost:8081` in browser
-2. Upload CSV file with contractors data
-3. Set period of renting
-4. Set amount for pay
-5. Press `Create Invoice Batch` button to generate invoice for all uploaded contractors
-6. Generated invoices PDF files can be found in `genertedInvoice` package
+2. From `Salesman` drop-down menu, press `Upload Salesman` link
+3. Upload `.csv` file with salesman data
+4. From `Contractors` drop-down menu, press `Upload Contractors` link
+5. Upload `.csv` file with contractors data
+6. From `Invoices` drop-down menu, press `Add Invoices Batch` link
+7. Check or change invoice date and set period of renting
+8. Press `Create Invoice Batch` button to generate invoice for all uploaded contractors
+9. Generated invoices display as a list

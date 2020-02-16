@@ -2,4 +2,3 @@
 .idea
 *.iml
 /testingData
-src/main/java/org/example/Test.java

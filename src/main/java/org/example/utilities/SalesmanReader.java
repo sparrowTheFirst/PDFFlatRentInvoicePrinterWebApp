@@ -21,7 +21,7 @@ public class SalesmanReader {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                String[] split = line.split("[;,]");
+                String[] split = line.split("[;]");
                 result.add(Salesman.builder()
                         .companyName(split[COMPANY_NAME])
                         .address(split[COMPANY_ADDRESS])
