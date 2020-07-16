@@ -2,11 +2,9 @@ package org.example.service;
 
 import org.example.model.Contractor;
 import org.example.model.Invoice;
-import org.example.repository.ContractorRepository;
 import org.example.repository.InvoiceRepository;
 import org.example.repository.SalesmanRepository;
 import org.example.utilities.ApartmentType;
-import org.example.utilities.NumberConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

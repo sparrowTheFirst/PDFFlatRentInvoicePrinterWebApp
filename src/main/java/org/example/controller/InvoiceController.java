@@ -1,6 +1,5 @@
 package org.example.controller;
 
-import org.example.model.Contractor;
 import org.example.model.Invoice;
 import org.example.service.ContractorService;
 import org.example.service.InvoiceService;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/invoice")
