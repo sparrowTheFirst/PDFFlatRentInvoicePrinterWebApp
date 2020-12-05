@@ -20,7 +20,7 @@
 
 <div th:fragment="menu">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Home</a>
+        <a class="navbar-brand" name="home" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,9 +32,9 @@
                         Salesman
                     </a>
                     <div class="dropdown-menu" aria-labelledby="salesmanDropDown">
-                        <a class="dropdown-item" href="/salesman/">Upload Salesman</a>
+                        <a class="dropdown-item" name="uploadSalesman" href="/salesman/">Upload Salesman</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/salesman/reset">Reset Salesman</a>
+                        <a class="dropdown-item" name="resetSalesman" href="/salesman/reset">Reset Salesman</a>
                     </div>
                 </li>
 
@@ -43,9 +43,9 @@
                         Contractors
                     </a>
                     <div class="dropdown-menu" aria-labelledby="contractorDropDown">
-                        <a class="dropdown-item" href="/contractor/">Upload Contractors</a>
+                        <a class="dropdown-item" name="uploadContractor" href="/contractor/">Upload Contractors</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/contractor/reset">Reset Contractors</a>
+                        <a class="dropdown-item" name="resetContractor" href="/contractor/reset">Reset Contractors</a>
                     </div>
                 </li>
 
@@ -54,13 +54,13 @@
                         Invoices
                     </a>
                     <div class="dropdown-menu" aria-labelledby="invoiceDropDown">
-                        <a class="dropdown-item" href="/invoice/">All</a>
-                        <a class="dropdown-item" href="/invoice/add">Add Invoice</a>
-                        <a class="dropdown-item" href="/invoice/addBatch">Add Invoices Batch</a>
+                        <a class="dropdown-item" name="allInvoices" href="/invoice/">All</a>
+                        <a class="dropdown-item" name="addInvoice" href="/invoice/add">Add Invoice</a>
+                        <a class="dropdown-item" name="addInvoicesBatch" href="/invoice/addBatch">Add Invoices Batch</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/invoice/print">Print All Invoices Batch</a>
+                        <a class="dropdown-item" name="printAllInvoices" href="/invoice/print">Print All Invoices Batch</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/invoice/reset">Reset Invoices</a>
+                        <a class="dropdown-item" name="resetInvoices" href="/invoice/reset">Reset Invoices</a>
                     </div>
                 </li>
             </ul>
